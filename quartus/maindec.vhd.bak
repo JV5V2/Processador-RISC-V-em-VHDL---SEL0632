@@ -1,0 +1,11 @@
+
+ENTITY maindec IS
+
+
+END maindec;
+
+ARCHITECTURE a OF maindec IS 
+
+
+
+END a;

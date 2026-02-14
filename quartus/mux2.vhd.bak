@@ -1,0 +1,19 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux2 is
+GENERIC(N : INTEGER:= 32);
+    port (
+        entrada_A : in  std_logic_vector(N-1 downto 0);
+        entrada_B : in  std_logic_vector(N-1 downto 0);
+        s : in  std_logic;
+        y : out std_logic_vector(N-1 downto 0)
+    );
+end entity mux2;
+
+architecture a of mux2 is
+begin
+    with s select
+        y <= entrada_A when '0',
+             entrada_B when others;
+end architecture a;

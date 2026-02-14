@@ -1,0 +1,19 @@
+entity som_1a is
+	port
+	(
+		-- Input ports
+		a,b,cin	: in  BIT;
+
+		-- Output ports
+		s,cf	: out BIT
+	);
+end som_1a;
+
+ARCHITECTURE funcionamento OF som_1a IS
+
+BEGIN
+
+s <= a XOR b XOR cin;
+cf <= (a AND b) OR (cin AND (a OR b));
+
+END funcionamento;

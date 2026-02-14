@@ -1,0 +1,43 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use STD.TEXTIO.ALL;
+use IEEE.STD_LOGIC_TEXTIO.ALL;
+use work.riscv_pkg.all; -- (Item i)
+
+entity imem is
+    -- (Item ii: Parametrização)
+    generic(RISCV_Data_Width : integer := 32); 
+    port(
+        a: in STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+        rd: out STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0)
+    );
+end;
+
+architecture behave of imem is
+    type ramtype is array (63 downto 0) of STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+
+    impure function init_ram_hex return ramtype is
+        file text_file : text open read_mode is "riscvtest.txt";
+        variable text_line : line;
+        variable ram_content : ramtype;
+        variable i : integer := 0;
+        variable temp_word : STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+    begin
+        for j in 0 to 63 loop
+            ram_content(j) := (others => '0');
+        end loop;
+        while not endfile(text_file) and i < 64 loop
+            readline(text_file, text_line);
+            hread(text_line, temp_word);
+            ram_content(i) := temp_word;
+            i := i + 1;
+        end loop;
+        return ram_content;
+    end function;
+
+    signal mem : ramtype := init_ram_hex;
+begin
+    -- Usa o Data_Width para indexação segura
+    rd <= mem(to_integer(unsigned(a(7 downto 2))));
+end;

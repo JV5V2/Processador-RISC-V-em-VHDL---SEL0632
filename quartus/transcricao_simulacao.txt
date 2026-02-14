@@ -1,0 +1,220 @@
+# Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
+# reading C:/intelFPGA/18.1/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project riscvsingle
+vsim -gui work.testbench
+# vsim -gui work.testbench
+# Start time: 20:44:14 on Dec 18,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.riscv_pkg
+# Loading work.testbench(test)
+# Loading work.top(test)
+# ** Warning: (vsim-3473) Component instance "rvsingle : riscvsingle" is not bound.
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut File: C:/Users/helio/OneDrive/Imagens/Risc/top.vhd
+# Loading work.imem(behave)
+# Loading work.dmem(behave)
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/WriteData(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/DataAdr(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/MemWrite has no driver.
+# This port will contribute value (U) to the signal network.
+# 1. Carrega o Testbench (Agora vai funcionar!)
+vsim work.testbench
+# End time: 20:44:56 on Dec 18,2025, Elapsed time: 0:00:42
+# Errors: 0, Warnings: 4
+# vsim work.testbench
+# Start time: 20:44:56 on Dec 18,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.riscv_pkg
+# Loading work.testbench(test)
+# Loading work.top(test)
+# ** Warning: (vsim-3473) Component instance "rvsingle : riscvsingle" is not bound.
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut File: C:/Users/helio/OneDrive/Imagens/Risc/top.vhd
+# Loading work.imem(behave)
+# Loading work.dmem(behave)
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/WriteData(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/DataAdr(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/MemWrite has no driver.
+# This port will contribute value (U) to the signal network.
+
+# 2. Configura as ondas visualmente
+delete wave *
+add wave -noupdate -divider "Sinais Vitais"
+add wave -noupdate /testbench/clk
+add wave -noupdate /testbench/reset
+
+add wave -noupdate -divider "Instrucoes"
+add wave -noupdate -radix hex /testbench/dut/rvsingle/PC
+# (vish-4014) No objects found matching '/testbench/dut/rvsingle/PC'.
+add wave -noupdate -radix hex /testbench/dut/rvsingle/Instr
+# (vish-4014) No objects found matching '/testbench/dut/rvsingle/Instr'.
+
+add wave -noupdate -divider "Resultado (40)"
+add wave -noupdate /testbench/MemWrite
+add wave -noupdate -radix unsigned /testbench/DataAdr
+add wave -noupdate -radix unsigned /testbench/WriteData
+
+# 3. Roda a simulação
+run 200 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/dmem1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/imem1
+wave zoom full
+# {0 ps} {210 ns}
+# 1. Inicia o simulador (Isso abre a janela Wave)
+vsim work.testbench
+# End time: 20:47:17 on Dec 18,2025, Elapsed time: 0:02:21
+# Errors: 2, Warnings: 6
+# vsim work.testbench
+# Start time: 20:47:18 on Dec 18,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.riscv_pkg
+# Loading work.testbench(test)
+# Loading work.top(test)
+# ** Warning: (vsim-3473) Component instance "rvsingle : riscvsingle" is not bound.
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut File: C:/Users/helio/OneDrive/Imagens/Risc/top.vhd
+# Loading work.imem(behave)
+# Loading work.dmem(behave)
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/WriteData(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/DataAdr(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/dut/MemWrite has no driver.
+# This port will contribute value (U) to the signal network.
+
+# 2. Configura as ondas
+delete wave *
+add wave -noupdate -divider "Sistema"
+add wave -noupdate /testbench/clk
+add wave -noupdate /testbench/reset
+
+add wave -noupdate -divider "Processador"
+add wave -noupdate -radix hex /testbench/dut/rvsingle/PC
+# (vish-4014) No objects found matching '/testbench/dut/rvsingle/PC'.
+add wave -noupdate -radix hex /testbench/dut/rvsingle/Instr
+# (vish-4014) No objects found matching '/testbench/dut/rvsingle/Instr'.
+
+add wave -noupdate -divider "Controle ALU (4 bits)"
+add wave -noupdate -bin /testbench/dut/rvsingle/c/ALUControl
+# (vish-4014) No objects found matching '/testbench/dut/rvsingle/c/ALUControl'.
+
+add wave -noupdate -divider "Resultado (40)"
+add wave -noupdate /testbench/MemWrite
+add wave -noupdate -radix unsigned /testbench/DataAdr
+add wave -noupdate -radix unsigned /testbench/WriteData
+
+# 3. Roda
+run 200 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/dmem1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/imem1
+wave zoom full
+# {0 ps} {210 ns}
+quit -sim
+# End time: 20:58:15 on Dec 18,2025, Elapsed time: 0:10:57
+# Errors: 3, Warnings: 6
+# reading C:/intelFPGA/18.1/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project riscvsingle1_1
+# Compile of adder.vhd was successful.
+# Compile of alu.vhd was successful.
+# Compile of aludec.vhd was successful.
+# Compile of controller.vhd was successful.
+# Compile of datapath.vhd was successful.
+# Compile of dmem.vhd was successful.
+# Compile of extend.vhd was successful.
+# Compile of flopr.vhd was successful.
+# Compile of imem.vhd was successful.
+# Compile of maindec.vhd was successful.
+# Compile of mux2.vhd was successful.
+# Compile of mux3.vhd was successful.
+# Compile of regfile.vhd was successful.
+# Compile of riscv_pkg.vhd was successful.
+# Compile of riscvsingle.vhd was successful.
+# Compile of slt.vhd was successful.
+# Compile of som_1a.vhd was successful.
+# Compile of test_mux2.vhd was successful.
+# Compile of testbench.vhd was successful.
+# Compile of top.vhd was successful.
+# Load canceled
+vsim work.testbench
+# vsim work.testbench
+# Start time: 21:08:00 on Dec 18,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.testbench(test)
+# Loading work.riscv_pkg
+# Loading work.top(test)
+# Loading work.riscvsingle(struct)
+# Loading work.controller(struct)
+# Loading work.maindec(behave)
+# Loading work.aludec(behave)
+# Loading work.datapath(struct)
+# Loading work.mux2(behave)
+# Loading work.flopr(asynchronous)
+# Loading work.adder(behave)
+# Loading work.regfile(behave)
+# Loading work.extend(behavioral)
+# Loading work.alu(behave)
+# Loading work.mux3(behave)
+# Loading work.imem(behave)
+# Loading work.dmem(behave)
+# 1. Limpa a janela de ondas antiga
+delete wave *
+
+# 2. Adiciona Clock e Reset (Básico)
+add wave -noupdate -divider "Sistema"
+add wave -noupdate /testbench/clk
+add wave -noupdate /testbench/reset
+
+# 3. Adiciona o PC e Instrução (Para ver se o processador está andando)
+add wave -noupdate -divider "Processador (Interno)"
+add wave -noupdate -radix hex /testbench/dut/rvsingle/PC
+add wave -noupdate -radix hex /testbench/dut/rvsingle/Instr
+add wave -noupdate -radix hex /testbench/dut/rvsingle/dp/PCPlus4
+
+# 4. Adiciona o Resultado Final (Para comprovar que funcionou)
+# Coloquei em DECIMAL para você ver o 100 e o 25 fácil
+add wave -noupdate -divider "Resultado (Memoria)"
+add wave -noupdate /testbench/MemWrite
+add wave -noupdate -radix unsigned /testbench/DataAdr
+add wave -noupdate -radix unsigned /testbench/WriteData
+
+# 5. Reinicia e Roda a simulação
+restart -f
+run 200 ns
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: helio  Hostname: RECEBA123  ProcessID: 26176
+#           Attempting to use alternate WLF file "./wlftabzfm1".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftabzfm1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/dmem1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/imem1
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/rvsingle/dp/mainalu
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/rvsingle/dp/rf
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/rvsingle/dp/rf
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /testbench/dut/rvsingle/dp/mainalu
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 3  Instance: /testbench/dut/dmem1
+wave zoom full
+# {0 ps} {210 ns}

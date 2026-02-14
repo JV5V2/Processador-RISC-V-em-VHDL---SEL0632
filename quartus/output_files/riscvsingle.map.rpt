@@ -1,0 +1,703 @@
+Analysis & Synthesis report for riscvsingle
+Sat Jun 21 19:47:24 2025
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. User-Specified and Inferred Latches
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |datapath
+ 12. Parameter Settings for User Entity Instance: adder:adder_inst1
+ 13. Parameter Settings for User Entity Instance: adder:adder_inst2
+ 14. Parameter Settings for User Entity Instance: mux2:mux2_inst1
+ 15. Parameter Settings for User Entity Instance: mux2:mux2_inst2
+ 16. Parameter Settings for User Entity Instance: flopr:flopr_inst
+ 17. Parameter Settings for User Entity Instance: alu:alu_inst
+ 18. Parameter Settings for User Entity Instance: alu:alu_inst|adder:adder_inst
+ 19. Parameter Settings for User Entity Instance: alu:alu_inst|slt:slt_inst
+ 20. Port Connectivity Checks: "alu:alu_inst|adder:adder_inst"
+ 21. Port Connectivity Checks: "alu:alu_inst"
+ 22. Port Connectivity Checks: "adder:adder_inst2"
+ 23. Port Connectivity Checks: "adder:adder_inst1"
+ 24. Port Connectivity Checks: "extend:extend_inst"
+ 25. Post-Synthesis Netlist Statistics for Top Partition
+ 26. Elapsed Time Per Partition
+ 27. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Jun 21 19:47:24 2025           ;
+; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
+; Revision Name                      ; riscvsingle                                     ;
+; Top-level Entity Name              ; datapath                                        ;
+; Family                             ; MAX 10                                          ;
+; Total logic elements               ; 2,737                                           ;
+;     Total combinational functions  ; 1,714                                           ;
+;     Dedicated logic registers      ; 1,056                                           ;
+; Total registers                    ; 1056                                            ;
+; Total pins                         ; 173                                             ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
+; UFM blocks                         ; 0                                               ;
+; ADC blocks                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 10M50DAF484C7G     ;                    ;
+; Top-level entity name                                            ; datapath           ; riscvsingle        ;
+; Family name                                                      ; MAX 10             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 6           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.1%      ;
+;     Processor 4            ;   0.1%      ;
+;     Processor 5            ;   0.1%      ;
+;     Processor 6            ;   0.1%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                    ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                             ; Library ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------+---------+
+; mux2.vhd                         ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/mux2.vhd      ;         ;
+; mux3.vhd                         ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/mux3.vhd      ;         ;
+; flopr.vhd                        ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/flopr.vhd     ;         ;
+; som_1a.vhd                       ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/som_1a.vhd    ;         ;
+; adder.vhd                        ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/adder.vhd     ;         ;
+; alu.vhd                          ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd       ;         ;
+; slt.vhd                          ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/slt.vhd       ;         ;
+; riscv_pkg.vhd                    ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/riscv_pkg.vhd ;         ;
+; regfile.vhd                      ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/regfile.vhd   ;         ;
+; extend.vhd                       ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/extend.vhd    ;         ;
+; datapath.vhd                     ; yes             ; User VHDL File  ; C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd  ;         ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 2,737     ;
+;                                             ;           ;
+; Total combinational functions               ; 1714      ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 1473      ;
+;     -- 3 input functions                    ; 236       ;
+;     -- <=2 input functions                  ; 5         ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 1683      ;
+;     -- arithmetic mode                      ; 31        ;
+;                                             ;           ;
+; Total registers                             ; 1056      ;
+;     -- Dedicated logic registers            ; 1056      ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 173       ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 1056      ;
+; Total fan-out                               ; 10048     ;
+; Average fan-out                             ; 3.22      ;
++---------------------------------------------+-----------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                        ;
++--------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-------------------------------------------------------------------+-------------+--------------+
+; Compilation Hierarchy Node           ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                               ; Entity Name ; Library Name ;
++--------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-------------------------------------------------------------------+-------------+--------------+
+; |datapath                            ; 1714 (0)            ; 1056 (0)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 173  ; 0            ; 0          ; |datapath                                                         ; datapath    ; work         ;
+;    |alu:alu_inst|                    ; 222 (147)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst                                            ; alu         ; work         ;
+;       |adder:adder_inst|             ; 43 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst                           ; adder       ; work         ;
+;          |som_1a:\somadores:10:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:10:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:11:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:11:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:13:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:13:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:14:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:14:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:15:soma| ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:15:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:17:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:17:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:18:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:18:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:1:soma|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:1:soma  ; som_1a      ; work         ;
+;          |som_1a:\somadores:20:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:20:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:21:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:21:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:22:soma| ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:22:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:24:soma| ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:24:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:25:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:25:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:27:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:27:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:28:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:28:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:29:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:29:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:30:soma| ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:30:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:31:soma| ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:31:soma ; som_1a      ; work         ;
+;          |som_1a:\somadores:3:soma|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:3:soma  ; som_1a      ; work         ;
+;          |som_1a:\somadores:4:soma|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:4:soma  ; som_1a      ; work         ;
+;          |som_1a:\somadores:6:soma|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:6:soma  ; som_1a      ; work         ;
+;          |som_1a:\somadores:7:soma|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:7:soma  ; som_1a      ; work         ;
+;          |som_1a:\somadores:8:soma|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|adder:adder_inst|som_1a:\somadores:8:soma  ; som_1a      ; work         ;
+;       |slt:slt_inst|                 ; 32 (32)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|alu:alu_inst|slt:slt_inst                               ; slt         ; work         ;
+;    |flopr:flopr_inst|                ; 1 (1)               ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|flopr:flopr_inst                                        ; flopr       ; work         ;
+;    |mux2:mux2_inst1|                 ; 35 (35)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|mux2:mux2_inst1                                         ; mux2        ; work         ;
+;    |mux3:mux3_inst|                  ; 64 (64)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|mux3:mux3_inst                                          ; mux3        ; work         ;
+;    |regfile:regfile_inst|            ; 1392 (1392)         ; 1024 (1024)               ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |datapath|regfile:regfile_inst                                    ; regfile     ; work         ;
++--------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-------------------------------------------------------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; alu:alu_inst|Result[1]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[2]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[3]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[4]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[5]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[6]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[7]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[8]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[9]                              ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[10]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[11]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[12]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[13]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[14]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[15]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[16]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[17]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[18]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[19]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[20]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[21]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[22]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[23]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[24]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[25]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[26]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[27]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[28]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[29]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[30]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; alu:alu_inst|Result[31]                             ; alu:alu_inst|Mux34  ; yes                    ;
+; Number of user-specified and inferred latches = 31  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 1056  ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 32    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 1024  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |datapath|mux3:mux3_inst|Mux31 ;
+; 7:1                ; 31 bits   ; 124 LEs       ; 62 LEs               ; 62 LEs                 ; No         ; |datapath|alu:alu_inst|Mux3    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |datapath ;
++------------------+-------+-----------------------------------------------+
+; Parameter Name   ; Value ; Type                                          ;
++------------------+-------+-----------------------------------------------+
+; RISCV_Data_Width ; 32    ; Signed Integer                                ;
++------------------+-------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: adder:adder_inst1 ;
++------------------+-------+-------------------------------------+
+; Parameter Name   ; Value ; Type                                ;
++------------------+-------+-------------------------------------+
+; RISCV_Data_Width ; 32    ; Signed Integer                      ;
++------------------+-------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: adder:adder_inst2 ;
++------------------+-------+-------------------------------------+
+; Parameter Name   ; Value ; Type                                ;
++------------------+-------+-------------------------------------+
+; RISCV_Data_Width ; 32    ; Signed Integer                      ;
++------------------+-------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: mux2:mux2_inst1 ;
++----------------+-------+-------------------------------------+
+; Parameter Name ; Value ; Type                                ;
++----------------+-------+-------------------------------------+
+; N              ; 32    ; Signed Integer                      ;
++----------------+-------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: mux2:mux2_inst2 ;
++----------------+-------+-------------------------------------+
+; Parameter Name ; Value ; Type                                ;
++----------------+-------+-------------------------------------+
+; N              ; 32    ; Signed Integer                      ;
++----------------+-------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: flopr:flopr_inst ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; n              ; 32    ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: alu:alu_inst ;
++------------------+-------+--------------------------------+
+; Parameter Name   ; Value ; Type                           ;
++------------------+-------+--------------------------------+
+; riscv_data_width ; 32    ; Signed Integer                 ;
++------------------+-------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: alu:alu_inst|adder:adder_inst ;
++------------------+-------+-------------------------------------------------+
+; Parameter Name   ; Value ; Type                                            ;
++------------------+-------+-------------------------------------------------+
+; RISCV_Data_Width ; 32    ; Signed Integer                                  ;
++------------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: alu:alu_inst|slt:slt_inst ;
++------------------+-------+---------------------------------------------+
+; Parameter Name   ; Value ; Type                                        ;
++------------------+-------+---------------------------------------------+
+; riscv_data_width ; 32    ; Signed Integer                              ;
++------------------+-------+---------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_inst|adder:adder_inst" ;
++------+-------+----------+---------------------------------+
+; Port ; Type  ; Severity ; Details                         ;
++------+-------+----------+---------------------------------+
+; cin  ; Input ; Info     ; Stuck at GND                    ;
++------+-------+----------+---------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_inst"                                                                       ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; c    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "adder:adder_inst2"                                                                  ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; b    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cin  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cout ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "adder:adder_inst1"                                                                  ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; cin  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cout ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "extend:extend_inst"                                                                    ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; imm_ext ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 173                         ;
+; cycloneiii_ff         ; 1056                        ;
+;     CLR               ; 32                          ;
+;     ENA               ; 1024                        ;
+; cycloneiii_lcell_comb ; 1715                        ;
+;     arith             ; 31                          ;
+;         3 data inputs ; 31                          ;
+;     normal            ; 1684                        ;
+;         1 data inputs ; 1                           ;
+;         2 data inputs ; 5                           ;
+;         3 data inputs ; 205                         ;
+;         4 data inputs ; 1473                        ;
+;                       ;                             ;
+; Max LUT depth         ; 29.00                       ;
+; Average LUT depth     ; 17.54                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+    Info: Processing started: Sat Jun 21 19:47:13 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off riscvsingle -c riscvsingle
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file test_mux2.vhd
+    Info (12022): Found design unit 1: test_mux2-tb File: C:/Users/jv200/Desktop/riscvsingle/quartus/test_mux2.vhd Line: 4
+    Info (12023): Found entity 1: test_mux2 File: C:/Users/jv200/Desktop/riscvsingle/quartus/test_mux2.vhd Line: 1
+Info (12021): Found 2 design units, including 1 entities, in source file mux2.vhd
+    Info (12022): Found design unit 1: mux2-a File: C:/Users/jv200/Desktop/riscvsingle/quartus/mux2.vhd Line: 14
+    Info (12023): Found entity 1: mux2 File: C:/Users/jv200/Desktop/riscvsingle/quartus/mux2.vhd Line: 4
+Warning (12019): Can't analyze file -- file test_mux3.vhd is missing
+Info (12021): Found 2 design units, including 1 entities, in source file mux3.vhd
+    Info (12022): Found design unit 1: mux3-funcionamento File: C:/Users/jv200/Desktop/riscvsingle/quartus/mux3.vhd Line: 16
+    Info (12023): Found entity 1: mux3 File: C:/Users/jv200/Desktop/riscvsingle/quartus/mux3.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file flopr.vhd
+    Info (12022): Found design unit 1: flopr-arquitetura File: C:/Users/jv200/Desktop/riscvsingle/quartus/flopr.vhd Line: 16
+    Info (12023): Found entity 1: flopr File: C:/Users/jv200/Desktop/riscvsingle/quartus/flopr.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file som_1a.vhd
+    Info (12022): Found design unit 1: som_1a-teste File: C:/Users/jv200/Desktop/riscvsingle/quartus/som_1a.vhd Line: 12
+    Info (12023): Found entity 1: som_1a File: C:/Users/jv200/Desktop/riscvsingle/quartus/som_1a.vhd Line: 1
+Info (12021): Found 2 design units, including 1 entities, in source file adder.vhd
+    Info (12022): Found design unit 1: adder-funcionamento File: C:/Users/jv200/Desktop/riscvsingle/quartus/adder.vhd Line: 15
+    Info (12023): Found entity 1: adder File: C:/Users/jv200/Desktop/riscvsingle/quartus/adder.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file alu.vhd
+    Info (12022): Found design unit 1: alu-funcionamento File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 15
+    Info (12023): Found entity 1: alu File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file slt.vhd
+    Info (12022): Found design unit 1: slt-funcionamento File: C:/Users/jv200/Desktop/riscvsingle/quartus/slt.vhd Line: 16
+    Info (12023): Found entity 1: slt File: C:/Users/jv200/Desktop/riscvsingle/quartus/slt.vhd Line: 5
+Info (12021): Found 2 design units, including 0 entities, in source file riscv_pkg.vhd
+    Info (12022): Found design unit 1: riscv_pkg File: C:/Users/jv200/Desktop/riscvsingle/quartus/riscv_pkg.vhd Line: 5
+    Info (12022): Found design unit 2: riscv_pkg-body File: C:/Users/jv200/Desktop/riscvsingle/quartus/riscv_pkg.vhd Line: 132
+Info (12021): Found 2 design units, including 1 entities, in source file regfile.vhd
+    Info (12022): Found design unit 1: regfile-behavioral File: C:/Users/jv200/Desktop/riscvsingle/quartus/regfile.vhd Line: 18
+    Info (12023): Found entity 1: regfile File: C:/Users/jv200/Desktop/riscvsingle/quartus/regfile.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file extend.vhd
+    Info (12022): Found design unit 1: extend-behavioral File: C:/Users/jv200/Desktop/riscvsingle/quartus/extend.vhd Line: 12
+    Info (12023): Found entity 1: extend File: C:/Users/jv200/Desktop/riscvsingle/quartus/extend.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file /users/jv200/desktop/riscvsingle/src/aludec.vhd
+    Info (12022): Found design unit 1: aludec-funcionamento File: C:/Users/jv200/Desktop/riscvsingle/src/aludec.vhd Line: 14
+    Info (12023): Found entity 1: aludec File: C:/Users/jv200/Desktop/riscvsingle/src/aludec.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file maindec.vhd
+    Info (12022): Found design unit 1: maindec-a File: C:/Users/jv200/Desktop/riscvsingle/quartus/maindec.vhd Line: 22
+    Info (12023): Found entity 1: maindec File: C:/Users/jv200/Desktop/riscvsingle/quartus/maindec.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file datapath.vhd
+    Info (12022): Found design unit 1: datapath-a File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 33
+    Info (12023): Found entity 1: datapath File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 8
+Info (12127): Elaborating entity "datapath" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at datapath.vhd(35): object "Immext" assigned a value but never read File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 35
+Info (12128): Elaborating entity "extend" for hierarchy "extend:extend_inst" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 45
+Info (12128): Elaborating entity "adder" for hierarchy "adder:adder_inst1" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 52
+Info (12128): Elaborating entity "som_1a" for hierarchy "adder:adder_inst1|som_1a:\somadores:0:soma" File: C:/Users/jv200/Desktop/riscvsingle/quartus/adder.vhd Line: 30
+Info (12128): Elaborating entity "mux2" for hierarchy "mux2:mux2_inst1" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 69
+Info (12128): Elaborating entity "mux3" for hierarchy "mux3:mux3_inst" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 87
+Info (12128): Elaborating entity "flopr" for hierarchy "flopr:flopr_inst" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 97
+Info (12128): Elaborating entity "regfile" for hierarchy "regfile:regfile_inst" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 105
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_inst" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 116
+Warning (10492): VHDL Process Statement warning at alu.vhd(72): signal "adder_signal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 72
+Warning (10492): VHDL Process Statement warning at alu.vhd(73): signal "cout_temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 73
+Warning (10492): VHDL Process Statement warning at alu.vhd(74): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 74
+Warning (10492): VHDL Process Statement warning at alu.vhd(78): signal "adder_signal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 78
+Warning (10492): VHDL Process Statement warning at alu.vhd(79): signal "cout_temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 79
+Warning (10492): VHDL Process Statement warning at alu.vhd(80): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 80
+Warning (10492): VHDL Process Statement warning at alu.vhd(84): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 84
+Warning (10492): VHDL Process Statement warning at alu.vhd(88): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 88
+Warning (10492): VHDL Process Statement warning at alu.vhd(91): signal "slt_signal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 91
+Warning (10492): VHDL Process Statement warning at alu.vhd(92): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 92
+Warning (10492): VHDL Process Statement warning at alu.vhd(97): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 97
+Warning (10631): VHDL Process Statement warning at alu.vhd(65): inferring latch(es) for signal or variable "Result", which holds its previous value in one or more paths through the process File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Warning (10631): VHDL Process Statement warning at alu.vhd(65): inferring latch(es) for signal or variable "C", which holds its previous value in one or more paths through the process File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "C" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[1]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[2]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[3]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[4]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[5]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[6]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[7]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[8]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[9]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[10]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[11]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[12]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[13]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[14]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[15]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[16]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[17]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[18]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[19]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[20]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[21]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[22]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[23]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[24]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[25]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[26]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[27]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[28]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[29]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[30]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (10041): Inferred latch for "Result[31]" at alu.vhd(65) File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+Info (12128): Elaborating entity "slt" for hierarchy "alu:alu_inst|slt:slt_inst" File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 62
+Info (276014): Found 1 instances of uninferred RAM logic
+    Info (276007): RAM logic "regfile:regfile_inst|register_bank" is uninferred due to asynchronous read logic File: C:/Users/jv200/Desktop/riscvsingle/quartus/regfile.vhd Line: 21
+Warning (13012): Latch alu:alu_inst|Result[1] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[2] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[3] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[4] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[5] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[6] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[7] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[8] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[9] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[10] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[11] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[12] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[13] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[14] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[15] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[16] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[17] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[18] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[19] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[20] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[21] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[22] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[23] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[24] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[25] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[26] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[27] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[28] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[29] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[30] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Warning (13012): Latch alu:alu_inst|Result[31] has unsafe behavior File: C:/Users/jv200/Desktop/riscvsingle/quartus/alu.vhd Line: 65
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ALUControl[2] File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 20
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "ImmSrc[0]" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 14
+    Warning (15610): No output dependent on input pin "ImmSrc[1]" File: C:/Users/jv200/Desktop/riscvsingle/quartus/datapath.vhd Line: 14
+Info (21057): Implemented 2942 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 76 input pins
+    Info (21059): Implemented 97 output pins
+    Info (21061): Implemented 2769 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 81 warnings
+    Info: Peak virtual memory: 4816 megabytes
+    Info: Processing ended: Sat Jun 21 19:47:24 2025
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:20
+
+

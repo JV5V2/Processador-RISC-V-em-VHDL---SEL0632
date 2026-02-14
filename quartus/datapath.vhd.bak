@@ -1,0 +1,174 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+library WORK;
+use WORK.riscv_pkg.ALL; -- Garante acesso aos componentes (alu, mux2, etc)
+
+ENTITY datapath IS
+    GENERIC(RISCV_Data_Width : INTEGER := 32);
+    PORT(
+        clk, reset : IN STD_LOGIC;
+        ResultSrc : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+        PCSrc : IN STD_LOGIC;
+        ALUSrc : IN STD_LOGIC;
+        RegWrite : IN STD_LOGIC;
+        ImmSrc : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+        ALUControl : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+        Zero : OUT STD_LOGIC;
+        PC : BUFFER STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+        Instr : IN STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+        ALUResult, WriteData : BUFFER STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+        ReadData : IN STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0)
+    );
+END datapath;
+
+ARCHITECTURE struct OF datapath IS
+    -- Sinais internos
+    signal PCNext, PCPlus4, PCTarget: STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+    signal ImmExt: STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+    signal SrcA, SrcB: STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+    signal Result: STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+    
+BEGIN
+    -- Lógica do PC (Program Counter)
+    -- Mux do PC: Escolhe entre PC+4 ou PCTarget (Branch/Jump)
+    pcmux: mux2 generic map(RISCV_Data_Width)
+        port map(PCPlus4, PCTarget, PCSrc, PCNext);
+        
+    -- Registrador PC
+    pcreg: flopr generic map(RISCV_Data_Width)
+        port map(clk, reset, PCNext, PC);
+        
+    -- Somador PC + 4
+    pcadd4: adder generic map(RISCV_Data_Width)
+        port map(PC, std_logic_vector(to_unsigned(4, RISCV_Data_Width)), '0', open, PCPlus4);
+        
+    -- Somador PC + Imm (Para Branches e Jumps)
+    pcaddbranch: adder generic map(RISCV_Data_Width)
+        port map(PC, ImmExt, '0', open, PCTarget);
+
+    -- Lógica do Banco de Registradores
+    rf: regfile 
+        port map(
+            clk => clk,
+            we3 => RegWrite,
+            a1  => Instr(19 downto 15),
+            a2  => Instr(24 downto 20),
+            a3  => Instr(11 downto 7),
+            wd3 => Result,
+            rd1 => SrcA,
+            rd2 => WriteData -- WriteData sai do RegFile (RD2) e vai para a memória
+        );
+        
+    -- Extensor de Sinal (Immediate Generate)
+    ext: extend port map(ImmSrc, Instr, ImmExt);
+    
+    -- Lógica da ALU
+    -- Mux da entrada B da ALU: Escolhe entre Registrador (RD2) ou Imediato
+    srcbmux: mux2 generic map(RISCV_Data_Width)
+        port map(WriteData, ImmExt, ALUSrc, SrcB);
+        
+    -- ALU Principal
+    mainalu: alu generic map(RISCV_Data_Width)
+        port map(SrcA, SrcB, ALUControl, ALUResult, Zero, open);
+        
+    -- Lógica do Resultado (Writeback)
+    -- Escolhe o que escrever no registrador: Resultado da ALU, Dado da Memória ou PC+4
+    resultmux: mux3 generic map(RISCV_Data_Width)
+        port map(ALUResult, ReadData, PCPlus4, ResultSrc, Result);
+
+END struct;
+
+ARCHITECTURE a OF datapath IS 
+
+signal Immext : STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+signal mux2_1_saida : STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+signal mux2_2_saida : STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+signal mux3_saida : STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+signal adder_1_saida : STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+signal adder_2_saida : STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+signal rd1 : STD_LOGIC_VECTOR(RISCV_Data_Width-1 DOWNTO 0);
+
+BEGIN
+
+extend_inst: extend PORT MAP (
+			imm_src => ImmSrc,
+			instr => Instr,
+			imm_ext => Immext
+);
+
+
+adder_inst1 : adder PORT MAP (
+			a => PC,
+			b => Instr,
+			Cin => '0',
+			S => adder_1_saida
+
+);
+
+adder_inst2 : adder PORT MAP (
+			a => PC,
+			b => "00000000000000000000000000000000",
+			Cin => '0',
+			S => adder_2_saida
+
+);
+
+
+mux2_inst1 : mux2 PORT MAP (
+
+			entrada_A => WriteData,
+			entrada_B => Instr,
+			S => ALUSrc,
+			y => mux2_1_saida
+
+);
+
+mux2_inst2 : mux2 PORT MAP (
+
+			entrada_A => adder_2_saida,
+			entrada_B => adder_1_saida,
+			S => PCSrc,
+			y => mux2_2_saida
+
+);
+
+mux3_inst : mux3 PORT MAP (
+			entrada_A => ALUResult,
+			entrada_B => ReadData,
+			entrada_C => adder_2_saida,
+			S => ResultSrc,
+			y => mux3_saida
+
+);
+
+
+flopr_inst : flopr PORT MAP(
+	 clk => clk, 
+	 rst => reset,
+	 D => mux2_2_saida,
+	 Q => PC
+
+);
+
+regfile_inst : regfile PORT MAP (
+		  CLK => clk,
+        WE3 => RegWrite,
+        A1  => Instr(31 DOWNTO 27),
+        A2  => Instr(26 DOWNTO 22),
+        A3  => Instr(21 DOWNTO 17),
+        WD3 => mux3_saida,
+        RD1 => rd1,
+        RD2 => WriteData
+);
+
+alu_inst : alu PORT MAP (
+			A => rd1,
+			B => mux2_1_saida,
+			ALUControl => ALUControl,
+			ALUResult => ALUResult,
+			Zero => Zero
+	
+);
+
+END a;

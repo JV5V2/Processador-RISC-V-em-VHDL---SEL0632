@@ -1,0 +1,32 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL; 
+use work.riscv_pkg.all; -- (Item i)
+
+entity top is
+    generic(RISCV_Data_Width : integer := 32);
+    port (
+        clk, reset: in STD_LOGIC;
+        WriteData, DataAdr: buffer STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+        MemWrite: buffer STD_LOGIC
+    );
+end;
+
+architecture test of top is
+    -- Componentes já estão declarados no pkg, não precisa redeclarar aqui se usar "work.riscv_pkg.all"
+    
+    signal PC, Instr, ReadData: STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+begin
+    -- Instanciação com Generic Map
+    rvsingle: riscvsingle 
+        -- generic map (RISCV_Data_Width => 32) -- Se seu riscvsingle tiver generic, descomente
+        port map(clk, reset, PC, Instr, MemWrite, ALUResult => DataAdr, WriteData => WriteData, ReadData => ReadData);
+        
+    imem1: imem 
+        generic map (RISCV_Data_Width => 32)
+        port map(PC, Instr);
+        
+    dmem1: dmem 
+        generic map (RISCV_Data_Width => 32)
+        port map(clk, MemWrite, DataAdr, WriteData, ReadData);
+end;

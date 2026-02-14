@@ -1,0 +1,59 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+package riscv_pkg is
+    constant RISCV_Data_Width : INTEGER := 32;
+
+    -- Declaração dos componentes principais (Item iii da imagem)
+    component top is
+        generic (RISCV_Data_Width : INTEGER := 32);
+        port (
+            clk, reset: in STD_LOGIC;
+            WriteData, DataAdr: buffer STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+            MemWrite: buffer STD_LOGIC
+        );
+    end component;
+
+    component imem is
+        generic (RISCV_Data_Width : INTEGER := 32);
+        port(
+            a: in STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+            rd: out STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0)
+        );
+    end component;
+
+    component dmem is
+        generic (RISCV_Data_Width : INTEGER := 32);
+        port(
+            clk, we: in STD_LOGIC;
+            a, wd: in STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0);
+            rd: out STD_LOGIC_VECTOR(RISCV_Data_Width-1 downto 0)
+        );
+    end component;
+
+    -- AQUI ESTAVA O ERRO: O 'end package' estava aqui. Removido!
+
+    component extend is
+        port(imm_src: in STD_LOGIC_VECTOR(1 downto 0);
+             instr: in STD_LOGIC_VECTOR(31 downto 0);
+             imm_ext: out STD_LOGIC_VECTOR(31 downto 0));
+    end component;
+
+    component flopr is
+        generic(width: integer := 32);
+        port(clk, reset: in STD_LOGIC;
+             d: in STD_LOGIC_VECTOR(width-1 downto 0);
+             q: out STD_LOGIC_VECTOR(width-1 downto 0));
+    end component;
+
+    component alu is
+        generic(width: integer := 32);
+        port(a, b: in STD_LOGIC_VECTOR(width-1 downto 0);
+             alucontrol: in STD_LOGIC_VECTOR(2 downto 0);
+             result: out STD_LOGIC_VECTOR(width-1 downto 0); 
+             zero: out STD_LOGIC;
+             cout: out STD_LOGIC);
+    end component;
+
+end riscv_pkg; -- O FINAL CORRETO É AQUI

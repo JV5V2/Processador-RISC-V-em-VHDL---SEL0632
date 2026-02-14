@@ -1,0 +1,18 @@
+Fitter Status : Successful - Sat Jun 21 19:55:34 2025
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Revision Name : riscvsingle
+Top-level Entity Name : datapath
+Family : MAX 10
+Device : 10M50DAF484C7G
+Timing Models : Final
+Total logic elements : 1,930 / 49,760 ( 4 % )
+    Total combinational functions : 1,715 / 49,760 ( 3 % )
+    Dedicated logic registers : 1,056 / 49,760 ( 2 % )
+Total registers : 1056
+Total pins : 173 / 360 ( 48 % )
+Total virtual pins : 0
+Total memory bits : 0 / 1,677,312 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )

@@ -1,0 +1,58 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use work.riscv_pkg.all; -- Garante acesso aos componentes
+
+entity riscvsingle is
+    generic(RISCV_Data_Width : integer := 32); -- ADICIONADO PARA CORRIGIR O AVISO
+    port(clk, reset : in std_logic;
+         PC         : out std_logic_vector(31 downto 0);
+         Instr      : in  std_logic_vector(31 downto 0);
+         MemWrite   : out std_logic;
+         ALUResult  : out std_logic_vector(31 downto 0);
+         WriteData  : out std_logic_vector(31 downto 0);
+         ReadData   : in  std_logic_vector(31 downto 0));
+end;
+
+architecture struct of riscvsingle is
+    signal ALUSrc, RegWrite, Jump, Zero, PCSrc, MemWrite_sig : std_logic;
+    signal ResultSrc, ImmSrc : std_logic_vector(1 downto 0);
+    signal ALUControl : std_logic_vector(2 downto 0);
+begin
+    -- Unidade de Controle
+    c: controller port map(
+        op         => Instr(6 downto 0),
+        funct3     => Instr(14 downto 12),
+        funct7b5   => Instr(30),
+        Zero       => Zero,
+        ResultSrc  => ResultSrc,
+        MemWrite   => MemWrite_sig,
+        PCSrc      => PCSrc,
+        ALUSrc     => ALUSrc,
+        RegWrite   => RegWrite,
+        Jump       => Jump,
+        ImmSrc     => ImmSrc,
+        ALUControl => ALUControl
+    );
+
+    -- Datapath
+    dp: datapath 
+        generic map(RISCV_Data_Width => RISCV_Data_Width)
+        port map(
+        clk        => clk, 
+        reset      => reset,
+        ResultSrc  => ResultSrc,
+        PCSrc      => PCSrc,
+        ALUSrc     => ALUSrc,
+        RegWrite   => RegWrite,
+        ImmSrc     => ImmSrc,
+        ALUControl => ALUControl,
+        Zero       => Zero,
+        PC         => PC,
+        Instr      => Instr,
+        ALUResult  => ALUResult,
+        WriteData  => WriteData,
+        ReadData   => ReadData
+    );
+    
+    MemWrite <= MemWrite_sig;
+end;

@@ -36,4 +36,6 @@ O projeto do processador RISC-V se divide nos seguintes arquivos .vhd:
 <b>Autores:</b> João Vitor de Oliveira Ribeiro e Hélio Arthur Molina
 
 
-<b>Professor Responsável:</b> Dr. Maximiliam LuppeInstituição: EESC-USP (Departamento de Engenharia Elétrica e de Computação).
+<b>Professor Responsável:</b> Dr. Maximiliam Luppe
+
+Instituição: EESC-USP (Departamento de Engenharia Elétrica e de Computação).
